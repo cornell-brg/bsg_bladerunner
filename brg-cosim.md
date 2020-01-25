@@ -51,7 +51,7 @@
    ```
  - Run your application
    ```bash
-   $ cd cd bsg_f1/testbenches/brg-apps
+   $ cd bsg_f1/testbenches/brg-apps
    $ make regression
    ```
    Note: this will run all apps that are registers with `bsg_bladerunner/bsg_f1/regression/brg-apps/tests.mk`. To run a single app, do `make <APP_NAME>.log`
