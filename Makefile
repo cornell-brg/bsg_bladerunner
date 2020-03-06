@@ -131,6 +131,8 @@ $(DEPENDENCIES): aws-fpga.setup.log
 	git submodule update --init $@
 
 setup: $(DEPENDENCIES) 
+	# PP: if you are using globally installed tools and amibuild
+	# then the setup target is not necessary
 	$(MAKE) -f amibuild.mk riscv-tools
 
 setup-uw: bsg_cadenv setup 
