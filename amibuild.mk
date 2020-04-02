@@ -68,7 +68,7 @@ RISCV_TOOLS_DIR=$(BSG_MANYCORE_DIR)/software/riscv-tools/
 RISCV_INSTALL_DIR=$(RISCV_TOOLS_DIR)/riscv-install/
 riscv-tools: $(RISCV_INSTALL_DIR)
 $(RISCV_INSTALL_DIR): 
-	make -j8 -C $(RISCV_TOOLS_DIR) install-clean
+	make -j72 -C $(RISCV_TOOLS_DIR) install-clean
 
 # TODO: Set permissions
 XDMA_KO_FILE := /lib/modules/$(shell uname -r)/extra/xdma.ko
