@@ -68,6 +68,7 @@ RISCV_INSTALL_DIR=$(RISCV_TOOLS_DIR)/riscv-install/
 riscv-tools: $(RISCV_INSTALL_DIR)
 $(RISCV_INSTALL_DIR): 
 	ln -s /work/global/brg/install/bare-pkgs/x86_64-centos7/bsg_manycore_tools/riscv-install $(RISCV_TOOLS_DIR)/riscv-install
+	ln -s /work/global/brg/install/bare-pkgs/x86_64-centos7/bsg_manycore_tools/llvm $(RISCV_TOOLS_DIR)/llvm
 
 # TODO: Set permissions
 XDMA_KO_FILE := /lib/modules/$(shell uname -r)/extra/xdma.ko
