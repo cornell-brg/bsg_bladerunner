@@ -34,7 +34,7 @@ print " Running bladerunner setup script"
 # alloy-gem5
 #-------------------------------------------------------------------------
 
-ver_num="v4.0.0"
+ver_num="v4.1.0"
 
 print "  - bladerunner version number: ${ver_num}"
 print "  - Setup bladerunner environment variables"
