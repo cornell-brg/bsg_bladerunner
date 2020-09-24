@@ -34,7 +34,7 @@ print " Running bladerunner setup script"
 # bsg_bladedrunner
 #-------------------------------------------------------------------------
 
-ver_num="v4.2.1"
+ver_num="v4.3.0"
 
 print "  - bladerunner version number: ${ver_num}"
 print "  - Setup bladerunner environment variables"
