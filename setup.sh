@@ -31,15 +31,23 @@ print ""
 print " Running bladerunner setup script"
 
 #-------------------------------------------------------------------------
-# alloy-gem5
+# bsg_bladedrunner
 #-------------------------------------------------------------------------
 
-ver_num="v3.6.1"
+ver_num="v4.3.0"
 
 print "  - bladerunner version number: ${ver_num}"
 print "  - Setup bladerunner environment variables"
 
 export BRG_BSG_BLADERUNNER_DIR="${BARE_PKGS_GLOBAL_PREFIX}/bladerunner"
+
+#-------------------------------------------------------------------------
+# Set machine
+#-------------------------------------------------------------------------
+
+export BSG_MACHINE=4x4_fast_n_fake
+export BSG_MACHINE_PATH=$BRG_BSG_BLADERUNNER_DIR/bsg_replicant/machines/$BSG_MACHINE
+
 
 #-------------------------------------------------------------------------
 # Done

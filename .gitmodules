@@ -10,3 +10,6 @@
 [submodule "aws-fpga"]
 	path = aws-fpga
 	url = git@github.com:cornell-brg/aws-fpga.git
+[submodule "verilator"]
+	path = verilator
+	url = https://github.com/verilator/verilator.git

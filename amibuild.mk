@@ -61,14 +61,14 @@ AWS_FPGA_REPO_URL ?= https://github.com/aws/aws-fpga.git
 AWS_FPGA_REPO_DIR := $(BLADERUNNER_ROOT)/aws-fpga
 setup-aws-fpga: $(AWS_FPGA_REPO_DIR).setup.log
 $(AWS_FPGA_REPO_DIR).setup.log:
-	git submodule update --init aws-fpga
-	. $(AWS_FPGA_REPO_DIR)/hdk_setup.sh > $@
+	. $(AWS_FPGA_REPO_DIR)/hdk_setup.sh | tee $@.temp && mv $@.temp $@
 
 RISCV_TOOLS_DIR=$(BSG_MANYCORE_DIR)/software/riscv-tools/
 RISCV_INSTALL_DIR=$(RISCV_TOOLS_DIR)/riscv-install/
 riscv-tools: $(RISCV_INSTALL_DIR)
 $(RISCV_INSTALL_DIR): 
-	make -j8 -C $(RISCV_TOOLS_DIR) install-clean
+	ln -s /work/global/brg/install/bare-pkgs/x86_64-centos7/bsg_manycore_tools/riscv-install $(RISCV_TOOLS_DIR)/riscv-install
+	ln -s /work/global/brg/install/bare-pkgs/x86_64-centos7/bsg_manycore_tools/llvm $(RISCV_TOOLS_DIR)/llvm
 
 # TODO: Set permissions
 XDMA_KO_FILE := /lib/modules/$(shell uname -r)/extra/xdma.ko
@@ -80,7 +80,7 @@ $(XDMA_KO_FILE): update-instance $(AWS_FPGA_REPO_DIR).setup.log
 bsg-install: /usr/lib64/libbsg_manycore_runtime.so.1.0
 /usr/lib64/libbsg_manycore_runtime.so.1.0: $(AWS_FPGA_REPO_DIR).setup.log
 	. $(AWS_FPGA_REPO_DIR)/sdk_setup.sh && make -C $(BSG_F1_DIR)/libraries
-	sudo make -C $(BSG_F1_DIR)/libraries install
+	sudo -E make -C $(BSG_F1_DIR)/libraries install BSG_PLATFORM=aws-fpga AGFI=$(AGFI_ID)
 
 env-install: /etc/profile.d/profile.d_bsg.sh /etc/profile.d/agfi.sh /etc/profile.d/bsg.sh /etc/profile.d/bsg-f1.sh
 
@@ -99,7 +99,7 @@ env-install: /etc/profile.d/profile.d_bsg.sh /etc/profile.d/agfi.sh /etc/profile
 	sudo sed -i 's/src\/project_data/bsg_bladerunner/' $@ 
 
 /etc/profile.d/profile.d_bsg.sh: $(AWS_FPGA_REPO_DIR).setup.log
-	sudo cp $(BSG_F1_DIR)/scripts/amibuild/profile.d_bsg.sh $@
+	sudo cp $(BLADERUNNER_ROOT)/scripts/amibuild/profile.d_bsg.sh $@
 	. $(AWS_FPGA_REPO_DIR)/hdk_setup.sh
 	. $(AWS_FPGA_REPO_DIR)/sdk_setup.sh
 
